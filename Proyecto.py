@@ -1,36 +1,15 @@
 # Variables de registro
 Identificacion = {}
 Días_semana = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sabado","Domingo"]
-Puntarenas = {}
-SanCarlos = {}
-Guanacaste = {}
 Hotel = {}
 Hotel_seleccionado = {}
 continuar = 1
 horarios_checkin = []
 horarios_checkout = []
-# Datos de los hoteles
 
-Posicion = 0
-file = open("Hoteles.txt","r")
-Datos = file.read()
-Especificaciones = Datos.split("&")
-for i in Especificaciones:
-    # Puntarenas
-    if i == "P,capacidad":
-        Puntarenas = int(Especificaciones[Posicion + 1])
-    # San Carlos
-    if i == "S,capacidad":
-        SanCarlos = int(Especificaciones[Posicion + 1])
-    # Guanacaste
-    if i == "G,capacidad":
-        Guanacaste = int(Especificaciones[Posicion + 1])
-    Posicion += 1
-file.close()
-Posicion = 0
 
 # Función para el módulo de hospedaje
-def modulo_registros(Puntarenas,SanCarlos,Guanacaste,continuar):
+def modulo_registros():
     while continuar == 0:
         print("1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste")
         opcion = int(input("Seleccione el Hotel para el registro: "))
@@ -613,7 +592,7 @@ while continuar == 1:
             opcion = int(input("Selecciona una opción: "))
              
             if opcion == 1:
-                Hotel,Identificacion = modulo_registros(Puntarenas,SanCarlos,Guanacaste,continuar)
+                Hotel,Identificacion = modulo_registros()
                 if Hotel == "Puntarenas":
                     Hotel_seleccionado = 1
                 if Hotel == "San Carlos":
