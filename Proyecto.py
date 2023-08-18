@@ -1,6 +1,5 @@
 # Variables de registro
 Identificacion = {}
-Días_semana = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sabado","Domingo"]
 Hotel = {}
 Hotel_seleccionado = {}
 continuar = 1
