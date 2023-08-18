@@ -7,7 +7,6 @@ continuar = 1
 horarios_checkin = []
 horarios_checkout = []
 
-
 # Función para el módulo de hospedaje
 def modulo_registros():
     while continuar == 0:
@@ -15,13 +14,10 @@ def modulo_registros():
         opcion = int(input("Seleccione el Hotel para el registro: "))
         if opcion == 1:
             Hotel = "Puntarenas"
-            continuar = 1
         elif opcion == 2:
             Hotel = "San Carlos"
-            continuar = 1
         elif opcion == 3:
             Hotel = "Guanacaste"
-            continuar = 1
         else:
             print("No hay habitaciones disponibles en el hotel que eligió, seleccione otro.")
     Nombre = input("Nombre del cliente: ")
