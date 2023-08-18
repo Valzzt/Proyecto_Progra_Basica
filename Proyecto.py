@@ -34,16 +34,13 @@ def modulo_registros(Puntarenas,SanCarlos,Guanacaste,continuar):
     while continuar == 0:
         print("1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste")
         opcion = int(input("Seleccione el Hotel para el registro: "))
-        if opcion == 1 and Puntarenas > 0:
-            print("Capacidad del hotel: 120 habitaciones\nCantidad máxima de personas por habitación: 4 \nCantidad de habitaciones disponibles en este momento:", Puntarenas)
+        if opcion == 1:
             Hotel = "Puntarenas"
             continuar = 1
-        elif opcion == 2 and SanCarlos > 0:
-            print("Capacidad del hotel: 60 habitaciones\nCantidad máxima de personas por habitación: 2 \nCantidad de habitaciones disponibles en este momento:", SanCarlos)
+        elif opcion == 2:
             Hotel = "San Carlos"
             continuar = 1
-        elif opcion == 3 and Guanacaste > 0:
-            print("Capacidad del hotel: 100 habitaciones\nCantidad máxima de personas por habitación: 4 \nCantidad de habitaciones disponibles en este momento:", Guanacaste)
+        elif opcion == 3:
             Hotel = "Guanacaste"
             continuar = 1
         else:
@@ -380,12 +377,7 @@ def calcular_montos(días_reserva, fines_semana,entre_semana, número_personas, 
     
 def hospedaje():
     #Realiza todo el proceso de reserva y check in/ check out
-    reserva_hotel = int(input("Ingrese el hotel en el que desea consultar disponibilidad:\n1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste  \n"))
-
-    while reserva_hotel not in [1,2,3]:
-
-        print("Opción de hotel no válida, ingrese el hotel nuevamente")
-        reserva_hotel = input("Ingrese el hotel en el que desea hospedarse:\n1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste  \n")
+    reserva_hotel = Hotel_seleccionado
 
     fecha_reserva = input("Ingrese la fecha en la que desea realizar su hospedaje (formato aaaa-mm-dd) \n" )
 
@@ -603,26 +595,6 @@ def modulo_facturacion():
 def modulo_reportes():
     # Implementa la lógica del módulo de reportes aquí
     pass
-
-#file = open("Hoteles.txt")
-#for i in Especificaciones:
-#    if Hotel == "Puntarenas":
-#        if i == "P,capacidad":
-#            Puntarenas -= 1
-#            Especificaciones[Posicion + 1] = Puntarenas
-#    if Hotel == "San Carlos":
-#        if i == "S,capacidad":
-#            SanCarlos -= 1
-#            Especificaciones[Posicion + 1] = SanCarlos
-#    if Hotel == "Guanacaste":
-#        if i == "G,capacidad":
-#            Guanacaste -= 1
-#            Especificaciones[Posicion + 1] = Guanacaste
-#    Posicion += 1
-#file.close()
-
-
-
     
 while continuar == 1:
     usuario = input("Ingrese su usuario: ")
