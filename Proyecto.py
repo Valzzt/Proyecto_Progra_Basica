@@ -14,10 +14,13 @@ def modulo_registros(continuar):
         opcion = int(input("Seleccione el Hotel para el registro: "))
         if opcion == 1:
             Hotel = "Puntarenas"
+            continuar == 1
         elif opcion == 2:
             Hotel = "San Carlos"
+            continuar == 1
         elif opcion == 3:
             Hotel = "Guanacaste"
+            continuar == 1
         else:
             print("Seleccione un hotel válido")
     Nombre = input("Nombre del cliente: ")
