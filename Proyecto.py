@@ -8,7 +8,7 @@ horarios_checkin = []
 horarios_checkout = []
 
 # Función para el módulo de hospedaje
-def modulo_registros():
+def modulo_registros(continuar):
     while continuar == 0:
         print("1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste")
         opcion = int(input("Seleccione el Hotel para el registro: "))
@@ -19,7 +19,7 @@ def modulo_registros():
         elif opcion == 3:
             Hotel = "Guanacaste"
         else:
-            print("No hay habitaciones disponibles en el hotel que eligió, seleccione otro.")
+            print("Seleccione un hotel válido")
     Nombre = input("Nombre del cliente: ")
     Identificacion = input("Número de identificación: ")
     Identificador = Identificacion + ":&"
@@ -588,7 +588,7 @@ while continuar == 1:
             opcion = int(input("Selecciona una opción: "))
              
             if opcion == 1:
-                Hotel,Identificacion = modulo_registros()
+                Hotel,Identificacion = modulo_registros(continuar)
                 if Hotel == "Puntarenas":
                     Hotel_seleccionado = 1
                 if Hotel == "San Carlos":
