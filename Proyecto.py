@@ -1,121 +1,16 @@
 # Variables de registro
 Identificacion = {}
-Hotel = {}
-Hotel_seleccionado = {}
+Días_semana = ["Lunes","Martes","Miércoles","Jueves","Viernes","Sabado","Domingo"]
+Puntarenas = {}
+SanCarlos = {}
+Guanacaste = {}
+Hotel = ""
+hotel_seleccionado = 0
 continuar = 1
 horarios_checkin = []
 horarios_checkout = []
-
-# Función para el módulo de hospedaje
-def modulo_registros(continuar):
-    while continuar == 0:
-        print("1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste")
-        opcion = int(input("Seleccione el Hotel para el registro: "))
-        if opcion == 1:
-            Hotel = "Puntarenas"
-            continuar == 1
-        elif opcion == 2:
-            Hotel = "San Carlos"
-            continuar == 1
-        elif opcion == 3:
-            Hotel = "Guanacaste"
-            continuar == 1
-        else:
-            print("Seleccione un hotel válido")
-    Nombre = input("Nombre del cliente: ")
-    Identificacion = input("Número de identificación: ")
-    Identificador = Identificacion + ":&"
-    Telefono = input("Número de teléfono:")
-    Pais = input("País: ")
-    Provincia = input("Provincia: ")
-    Canton = input("Cantón: ")
-    Distrito = input("Distrito: ")
-    Direccion = input("Otras especificaciones de dirección: ")
-    Edad = int(input("Edad: "))
-    if Edad < 18:
-        print("Debes de ser mayor de edad para poder realizar un registro, pide ayuda de un adulto para poder seguir adelante")
-        return
-    FormaDePago = input("Forma de pago (efectivo, transferencia, tarjeta de crédito): ")
-    if Hotel == "Puntarenas" or Hotel == "Guanacaste":
-        while continuar == 1:
-            n_acompañantes = int(input("¿Cuántas personas lo acompañan? "))
-            if n_acompañantes > 3:
-                print("El limite máximo de personas en este hotel es de 4 personas por habitación, inserte otra cantidad:")
-            else:
-                continuar = 0
-    if Hotel == "San Carlos":
-        while continuar == 1:
-            n_acompañantes = int(input("¿Cuántas personas lo acompañan? "))
-            if n_acompañantes > 1:
-                print("El limite máximo de personas en este hotel es de 2 personas por habitación, inserte otra cantidad:")
-            else:
-                continuar = 0
-    for i in range(n_acompañantes):
-        print("Datos del acompañante", i + 1)
-        Datos_acompañantes.append([0]*3)
-        Datos_acompañantes[i][0] = input("Nombre del acompañante: ")
-        Datos_acompañantes[i][1] = input("Número de identificación: ")
-        Datos_acompañantes[i][2] = input("Edad: ")
-    if Hotel == "Puntarenas":
-        file = open("Registros_Puntarenas.txt","a")
-    if Hotel == "San Carlos":
-        file = open("Registros_San Carlos.txt","a")
-    if Hotel == "Guanacaste":
-        file = open("Registros_Guanacaste.txt","a")
-    file.write("&Número de cliente")
-    file.write(Identificador)
-    file.write(Identificacion)
-    file.write("&Nombre del cliente")
-    file.write(Identificador)
-    file.write(Nombre)
-    file.write("&Número de identificación")
-    file.write(Identificador)
-    file.write(Identificacion)
-    file.write("&Teléfono")
-    file.write(Identificador)
-    file.write(Telefono)
-    file.write("&País")
-    file.write(Identificador)
-    file.write(Pais)
-    file.write("&Provincia")
-    file.write(Identificador)
-    file.write(Provincia)
-    file.write("&Cantón")
-    file.write(Identificador)
-    file.write(Canton)
-    file.write("&Distrito")
-    file.write(Identificador)
-    file.write(Distrito)
-    file.write("&Hotel")
-    file.write(Identificador)
-    file.write(Hotel)
-    file.write("&Otras especificaciones de dirección")
-    file.write(Identificador)
-    file.write(Direccion)
-    file.write("&Edad")
-    file.write(Identificador)
-    file.write(str(Edad))
-    file.write("&Forma de pago (efectivo, transferencia, tarjeta de crédito)")
-    file.write(Identificador)
-    file.write(FormaDePago)
-    file.write("&Numero de acompañantes")
-    file.write(Identificador)
-    file.write(str(n_acompañantes))
-    for i in range(n_acompañantes):
-        file.write("&Nombre del acompañante")
-        file.write(Identificador)
-        file.write(Datos_acompañantes[i][0])
-        file.write("&Número de identificación:")
-        file.write(Identificador)
-        file.write(Datos_acompañantes[i][1])
-        file.write("&Edad:")
-        file.write(Identificador)
-        file.write(Datos_acompañantes[i][2])
-    file.write("\n")
-    file.close()
-    print("¡Registro de información exitoso!")
-    return(Hotel,Identificacion)
-# Función para el módulo de reservas
+# Datos de los hoteles
+Datos_acompañantes = []
 personas_por_habitación_hotel = [4,2,4]
 
 Hotel_Puntarenas = []
@@ -139,9 +34,92 @@ checkin_SanCarlos =[]
 checkout_SanCarlos = []
 checkin_Guanacaste =[]
 checkout_Guanacaste = []
+Nombre = ""
 
 matriz_checkin = [checkin_Puntarenas,checkin_SanCarlos,checkin_Guanacaste]
 matriz_checkout = [checkout_Puntarenas,checkout_SanCarlos,checkout_Guanacaste]
+
+# Función para el módulo de hospedaje
+def modulo_registros(continuar):
+    while continuar == 0:
+        print("1 - Hotel Paraíso, Puntarenas\n2 - Hotel Paraíso, San Carlos\n3 - Hotel Paraíso, Guanacaste")
+        opcion = int(input("Seleccione el Hotel para el registro: "))
+        if opcion == 1:
+            Hotel = "Puntarenas"
+            continuar = 1
+        elif opcion == 2:
+            Hotel = "San Carlos"
+            continuar = 1
+        elif opcion == 3:
+            Hotel = "Guanacaste"
+            continuar = 1
+       
+    Nombre = input("Nombre del cliente: ")
+    Identificacion = input("Número de identificación: ")
+    Telefono = input("Número de teléfono:")
+    Pais = input("País: ")
+    Provincia = input("Provincia: ")
+    Canton = input("Cantón: ")
+    Distrito = input("Distrito: ")
+    Direccion = input("Otras especificaciones de dirección: ")
+    Edad = int(input("Edad: "))
+    FormaDePago = input("Forma de pago (efectivo, transferencia, tarjeta de crédito): ")
+  
+    n_acompañantes = int(input("¿Cuántas personas lo acompañan? "))
+     
+
+
+    for i in range(n_acompañantes):
+        print("Datos del acompañante", i + 1)
+        Datos_acompañantes.append([0]*3)
+        Datos_acompañantes[i][0] = input("Nombre del acompañante: ")
+        Datos_acompañantes[i][1] = input("Número de identificación: ")
+        Datos_acompañantes[i][2] = input("Edad: ")
+    if Hotel == "Puntarenas":
+        file = open("Registros_Puntarenas.txt","a")
+    if Hotel == "San Carlos":
+        file = open("Registros_San Carlos.txt","a")
+    if Hotel == "Guanacaste":
+        file = open("Registros_Guanacaste.txt","a")
+    file.write("&Número de cliente:")
+    file.write(Identificacion)
+    file.write("&Nombre del cliente:")
+    file.write(Nombre)
+    file.write("&Número de identificación:")
+    file.write(Identificacion)
+    file.write("&Teléfono:")
+    file.write(Telefono)
+    file.write("&País:")
+    file.write(Pais)
+    file.write("&Provincia:")
+    file.write(Provincia)
+    file.write("&Cantón:")
+    file.write(Canton)
+    file.write("&Distrito:")
+    file.write(Distrito)
+    file.write("&Hotel:")
+    file.write(Hotel)
+    file.write("&Otras especificaciones de dirección:")
+    file.write(Direccion)
+    file.write("&Edad:")
+    file.write(str(Edad))
+    file.write("&Forma de pago (efectivo, transferencia, tarjeta de crédito):")
+    file.write(FormaDePago)
+    file.write("&Numero de acompañantes:")
+    file.write(str(n_acompañantes))
+    for i in range(n_acompañantes):
+        file.write("&Nombre del acompañante:")
+        file.write(Datos_acompañantes[i][0])
+        file.write("&Número de identificación:")
+        file.write(Datos_acompañantes[i][1])
+        file.write("&Edad:")
+        file.write(Datos_acompañantes[i][2])
+    file.write("\n")
+    file.close()
+    print("¡Registro de información exitoso!")
+    return(Hotel,Identificacion)
+# Función para el módulo de reservas
+
 
 def consulta_disponibilidad(): #esta es para consultar una fecha específica 
 
@@ -356,9 +334,9 @@ def calcular_montos(días_reserva, fines_semana,entre_semana, número_personas, 
 
     
     
-def hospedaje():
+def hospedaje(subtotal,descuento,total_con_descuento,monto_total):
     #Realiza todo el proceso de reserva y check in/ check out
-    reserva_hotel = Hotel_seleccionado
+    reserva_hotel = hotel_seleccionado
 
     fecha_reserva = input("Ingrese la fecha en la que desea realizar su hospedaje (formato aaaa-mm-dd) \n" )
 
@@ -513,7 +491,7 @@ def generar_checkin(reserva_hotel, fecha_reserva):
                 break                
     if not disponible:
         matriz_checkin[reserva_hotel-1].append([serie,1])
-
+    
 
 def generar_checkout(reserva_hotel, fecha_reserva):
     #Lo mismo que la de checkin pero para check out
@@ -567,72 +545,98 @@ def consultar_horas_check_in_out(mensaje):
         hora_checkin = int(input())
     return hora_checkin
 
-# Función para el módulo de facturación
-def modulo_facturacion():
-    Posicion = 0
-    ID = input("Introduzca su número de identificador:")
-    Hotel = int(input("Introduzca el hotel que ha escogido: \n1 - Puntarenas\n2 - San Carlos\n3 - Guanacaste"))
-    if Hotel == 1:
-        file = open("Registros_Puntarenas.txt","r")
-        print("Puntarenas")
-    if Hotel == 2:
-        file = open("Registros_San Carlos.txt","r")
-        print("San Carlos")
-    if Hotel == 3:
-        file = open("Registros_Guanacaste.txt","r")
-        print("Guanacaste")
 
-    Datos = file.read()
-    Especificaciones = Datos.split("&")
-    for i in Especificaciones:
-        if i == "Otras especificaciones de dirección"+ ID + ":":
-             print(Especificaciones[Posicion + 1])
-        if i == "Teléfono"+ ID + ":":
-             print(Especificaciones[Posicion + 1])
-        if i == "Nombre del cliente"+ ID + ":":
-             print(Especificaciones[Posicion + 1])
-        Posicion += 1
 
-# Función para el módulo de reportes
+def crear_archivo():
+    file = open("hotel.txt","w")
+    file.write("Registro de facturas de los hoteles \n")
+    file.write(" ")
+    file.write("-------------------------------------------------")
+    file.write("\n")
+    file.close()
+   
+def módulo_facturación(Hotel,Nombre,subtotal,total_con_descuento,monto_total):
+    file = open("hotel.txt","a")
+    file.write(" \n")
+    file.write("Nombre del Hotel: " + str(Hotel))
+    file.write(" \n")
+    file.write("Nombre del huesped: " + str(Nombre))
+    file.write(" \n")
+    file.write("Subtotal: " + str(subtotal))
+    file.write(" \n")
+    file.write("Subtotal con descuento: " +  str(total_con_descuento))
+    file.write(" \n")
+    file.write("IVA: " + str(total_con_descuento *0.13))
+    file.write(" \n")
+    file.write("Monto Total: " + str(monto_total))
+    file.write(" \n")
+    file.write("-------------------------------------------------")
+    file.close()
+
 def modulo_reportes():
-    # Implementa la lógica del módulo de reportes aquí
-    pass
+    Seleccion = int(input("¿Que tipo de lista le gustaría visualizar?\n1 - Visitas por hotel\n2 - Facturas\n3 - Reservas realizadas el dia de hoy\n"))
+    if Seleccion == 1:
+        Hotel = int(input("1 - Puntarenas\n2 - San Carlos\n3 - Guanacaste"))
+        if Hotel == 1:
+            file = open("Registros_Puntarenas.txt","r")
+            Datos = file.read()
+            Especificaciones = Datos.split("&")
+        if Hotel == 2:
+            file = open("Registros_San Carlos.txt","r")
+            Datos = file.read()
+            Especificaciones = Datos.split("&")
+        if Hotel == 3:
+            file = open("Registros_Guanacaste.txt","r")
+            Datos = file.read()
+            Especificaciones = Datos.split("&")
+        for i in Especificaciones:
+             print(i)
+    file.close()
+
     
-while continuar == 1:
-    usuario = input("Ingrese su usuario: ")
-    contraseña = input("Ingrese su contraseña: ")
+def menu():
+    crear_archivo()
+    # Variables de registro
+    mantener_menu = 1
+    while mantener_menu == 1:
+        usuario = input("Ingrese su usuario: ")
+        contraseña = input("Ingrese su contraseña: ")
 
-    if usuario == "admin" and contraseña == "Adm112":
-        continuar = 0
-        print("Inicio de sesión exitoso.\n")
-        while continuar == 0:
-            print("Bienvenido al menú:")
-            print("1. Módulo de Registros")
-            print("2. Módulo de Reservas")
-            print("3. Módulo de Facturación")
-            print("4. Módulo de Reportes")
-            print("5. Salir")
-            opcion = int(input("Selecciona una opción: "))
+        if usuario == "admin" and contraseña == "Adm112":
+            continuar = 0
+            print("Inicio de sesión exitoso.\n")
+            while continuar == 0:
+                print("Bienvenido al menú:")
+                print("1. Módulo de Registros")
+                print("2. Módulo de Reservas")
+                print("3. Módulo de Facturación")
+                print("4. Módulo de Reportes")
+                print("5. Salir")
+                opcion = int(input("Selecciona una opción: "))
              
-            if opcion == 1:
-                Hotel,Identificacion = modulo_registros(continuar)
-                if Hotel == "Puntarenas":
-                    Hotel_seleccionado = 1
-                if Hotel == "San Carlos":
-                    Hotel_seleccionado = 2
-                if Hotel == "Guanacaste":
-                    Hotel_seleccionado = 3
-            elif opcion == 2:
-                hospedaje()
-            elif opcion == 3:
-                modulo_facturacion()
-            elif opcion == 4:
-                modulo_reportes()
-            elif opcion == 5:
-                print("Sesión finalizada.")
-                break
-            else:
-                print("Opción inválida. Por favor, elija una opción válida.")
-    else:
-        print("Credenciales incorrectas. Vuelve a intentarlo.")
+                if opcion == 1:
+                    Hotel,Identificacion = modulo_registros(continuar)
+                    if Hotel == "Puntarenas":
+                        Hotel_seleccionado = 1
+                    if Hotel == "San Carlos":
+                        Hotel_seleccionado = 2
+                    if Hotel == "Guanacaste":
+                        Hotel_seleccionado = 3
+                    consulta_disponibilidad()
+                elif opcion == 2:
+                    subtotal,descuento,total_con_descuento,monto_total = hospedaje()
+                elif opcion == 3:
+                    módulo_facturación(subtotal,descuento,total_con_descuento,monto_total)
+                elif opcion == 4:
+                    modulo_reportes()
+                elif opcion == 5:
+                    print("Sesión finalizada.")
+                    break
+                else:
+                    print("Opción inválida. Por favor, elija una opción válida.")
+        else:
+            print("Credenciales incorrectas. Vuelve a intentarlo.")
 
+
+if __name__ == "__main__":
+    menu()
