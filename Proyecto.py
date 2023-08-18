@@ -25,6 +25,7 @@ def modulo_registros(continuar):
     Nombre = input("Nombre del cliente: ")
     Identificacion = input("Número de identificación: ")
     Identificador = Identificacion + ":&"
+    Telefono = input("Número de teléfono:")
     Pais = input("País: ")
     Provincia = input("Provincia: ")
     Canton = input("Cantón: ")
@@ -70,6 +71,9 @@ def modulo_registros(continuar):
     file.write("&Número de identificación")
     file.write(Identificador)
     file.write(Identificacion)
+    file.write("&Teléfono")
+    file.write(Identificador)
+    file.write(Telefono)
     file.write("&País")
     file.write(Identificador)
     file.write(Pais)
@@ -565,8 +569,29 @@ def consultar_horas_check_in_out(mensaje):
 
 # Función para el módulo de facturación
 def modulo_facturacion():
-    # Implementa la lógica del módulo de facturación aquí
-    pass
+    Posicion = 0
+    ID = input("Introduzca su número de identificador:")
+    Hotel = int(input("Introduzca el hotel que ha escogido: \n1 - Puntarenas\n2 - San Carlos\n3 - Guanacaste"))
+    if Hotel == 1:
+        file = open("Registros_Puntarenas.txt","r")
+        print("Puntarenas")
+    if Hotel == 2:
+        file = open("Registros_San Carlos.txt","r")
+        print("San Carlos")
+    if Hotel == 3:
+        file = open("Registros_Guanacaste.txt","r")
+        print("Guanacaste")
+
+    Datos = file.read()
+    Especificaciones = Datos.split("&")
+    for i in Especificaciones:
+        if i == "Otras especificaciones de dirección"+ ID + ":":
+             print(Especificaciones[Posicion + 1])
+        if i == "Teléfono"+ ID + ":":
+             print(Especificaciones[Posicion + 1])
+        if i == "Nombre del cliente"+ ID + ":":
+             print(Especificaciones[Posicion + 1])
+        Posicion += 1
 
 # Función para el módulo de reportes
 def modulo_reportes():
